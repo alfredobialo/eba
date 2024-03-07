@@ -1,63 +1,33 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {ChessCellComponent} from "./chess-cell.component";
+import {ChessRowComponent} from "./chess-row.component";
 
 @Component({
   selector: 'eba-chess-board',
   standalone: true,
   imports: [
-    ChessCellComponent
+    ChessCellComponent,
+    ChessRowComponent
   ],
   template: `
-    <div class="m-2 ">
-      <div class="d-flex justify-content-start ">
-        @for (c of [0,1,2,3,4,5,6,7]; track c){
-          <eba-chess-cell [labelVisible]="$index ==0" [cellType]="$odd ? 'black' : 'white'" [bgColor]=" $odd ? '#3b753f' :'#dbd8cc'"/>
-        }
-      </div>
-      <div class="d-flex justify-content-start ">
-        @for (c of [0,1,2,3,4,5,6,7]; track c){
-          <eba-chess-cell [labelVisible]="$index ==0" [cellType]="!$odd ? 'black' : 'white'" [bgColor]=" !$odd ? '#3b753f' :'#dbd8cc'"/>
-        }
-      </div>
-      <div class="d-flex justify-content-start ">
-        @for (c of [0,1,2,3,4,5,6,7]; track c){
-          <eba-chess-cell [labelVisible]="$index ==0" [cellType]="$odd ? 'black' : 'white'" [bgColor]=" $odd ? '#3b753f' :'#dbd8cc'"/>
-        }
-      </div>
-      <div class="d-flex justify-content-start ">
-        @for (c of [0,1,2,3,4,5,6,7]; track c){
-          <eba-chess-cell [labelVisible]="$index ==0" [cellType]="!$odd ? 'black' : 'white'" [bgColor]=" !$odd ? '#3b753f' :'#dbd8cc'"/>
-        }
-      </div>
-      <div class="d-flex justify-content-start ">
-        @for (c of [0,1,2,3,4,5,6,7]; track c){
-          <eba-chess-cell [labelVisible]="$index ==0" [cellType]="$odd ? 'black' : 'white'" [bgColor]=" $odd ? '#3b753f' :'#dbd8cc'"/>
-        }
-      </div>
-      <div class="d-flex justify-content-start ">
-        @for (c of [0,1,2,3,4,5,6,7]; track c){
-          <eba-chess-cell [labelVisible]="$index ==0"  [cellType]="!$odd ? 'black' : 'white'" [bgColor]=" !$odd ? '#3b753f' :'#dbd8cc'"/>
-        }
-      </div>
-
-      <div class="d-flex justify-content-start ">
-        @for (c of [0,1,2,3,4,5,6,7]; track c){
-          <eba-chess-cell [labelVisible]="$index ==0" [cellType]="$odd ? 'black' : 'white'" [bgColor]=" $odd ? '#3b753f' :'#dbd8cc'"/>
-        }
-      </div>
-      <div class="d-flex justify-content-start ">
-        @for (c of [0,1,2,3,4,5,6,7]; track c){
-          <eba-chess-cell [labelVisible]="true" [cellType]="!$odd ? 'black' : 'white'" [bgColor]=" !$odd ? '#3b753f' :'#dbd8cc'"/>
-        }
-      </div>
-
-
-
+    <div class="m-2 chess-board-shadow bg-white">
+      <eba-chess-row />
+      <eba-chess-row />
+      <eba-chess-row />
+      <eba-chess-row />
+      <eba-chess-row />
+      <eba-chess-row />
+      <eba-chess-row />
+      <eba-chess-row />
     </div>
 
 
   `,
-  styles: ``,
+  styles: `
+    .chess-board-shadow {
+      box-shadow: 0 0 8px 2px rgba(56, 56, 56, 0.51)
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChessBoardComponent {

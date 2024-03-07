@@ -6,3 +6,73 @@
 body{
 
 }
+div.chess-piece {
+  width: 97%;
+  height: 97%;
+}
+div.black-piece.black-knight{
+   background-image: url('/assets/chess-board/bn.png');
+   background-position: center center;
+   background-size: contain;
+ }
+div.black-piece.black-rook{
+  background-image: url('/assets/chess-board/br.png');
+  background-position: center center;
+  background-size: contain;
+}
+
+div.black-piece.black-king{
+  background-image: url('/assets/chess-board/bk.png');
+  background-position: center center;
+  background-size: contain;
+}
+div.black-piece.black-queen{
+  background-image: url('/assets/chess-board/bq.png');
+  background-position: center center;
+  background-size: contain;
+}
+
+div.black-piece.black-bishop{
+  background-image: url('/assets/chess-board/bb.png');
+  background-position: center center;
+  background-size: contain;
+}
+div.black-piece.black-pawn{
+   background-image: url('/assets/chess-board/bp.png');
+   background-position: center center;
+   background-size: contain;
+ }
+
+/* White pieces*/
+div.white-piece.white-rook{
+  background-image: url('/assets/chess-board/wr.png');
+  background-position: center center;
+  background-size: contain;
+}
+
+div.white-piece.white-king{
+  background-image: url('/assets/chess-board/wk.png');
+  background-position: center center;
+  background-size: contain;
+}
+div.white-piece.white-queen{
+  background-image: url('/assets/chess-board/wq.png');
+  background-position: center center;
+  background-size: contain;
+}
+
+div.white-piece.white-bishop{
+  background-image: url('/assets/chess-board/wb.png');
+  background-position: center center;
+  background-size: contain;
+}
+div.white-piece.white-pawn{
+  background-image: url('/assets/chess-board/wp.png');
+  background-position: center center;
+  background-size: contain;
+}
+div.white-piece.white-knight{
+  background-image: url('/assets/chess-board/wn.png');
+  background-position: center center;
+  background-size: contain;
+}
