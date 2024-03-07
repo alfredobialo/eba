@@ -14,9 +14,10 @@ import {ChessPieceComponent} from "./chess-piece.component";
       @if(colLabelVisible()){
         <span class="row-label " [style.color]="labelColor()">{{ colLabel() }}</span>
       }
+
       @if(!isEmptyCell()){
         <div class="chess-piece " [style.color]="cellType()">
-          <eba-chess-piece [isWhitePiece]="isWhiteSector()" pieceType="pawn" />
+          <eba-chess-piece [isWhitePiece]="isWhiteSector()" [pieceType]="pieceType()" />
         </div>
       }
 
@@ -58,11 +59,12 @@ export class ChessCellComponent {
 
   isEmptyCell = input(false);
   colLabel = input(1);
+  cellIndex = input(1);
   cellType = input.required<"black" | "white">();
   rowLabelVisible = input(false);
   colLabelVisible = input(false);
   config = signal(inject(ChessConfigService).getCurrentBoardConfig());
-
+  pieceType = input("king");
   bgColor = computed(() => {
     return this.cellType() === "black" ? this.config().blackBgCellColor : this.config().whiteBgCellColor;
   });
@@ -74,7 +76,7 @@ export class ChessCellComponent {
     return this.lettersMap[this.colLabel()-1];  // since: we are using values 1 to 8 in the ui
   });
   isWhiteSector  = computed(() => {
-    return this.colLabel() <= 4;
+    return this.cellIndex() <= 4;
   })
 
   constructor() {

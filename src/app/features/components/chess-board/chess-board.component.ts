@@ -12,13 +12,6 @@ import {ChessRowComponent} from "./chess-row.component";
   template: `
     <div class="m-2 chess-board-shadow bg-white">
       <eba-chess-row />
-      <eba-chess-row />
-      <eba-chess-row />
-      <eba-chess-row />
-      <eba-chess-row />
-      <eba-chess-row />
-      <eba-chess-row />
-      <eba-chess-row />
     </div>
 
 

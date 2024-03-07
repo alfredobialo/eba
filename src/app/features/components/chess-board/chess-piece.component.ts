@@ -16,7 +16,7 @@ import {ChangeDetectionStrategy, Component, effect, input} from '@angular/core';
 })
 export class ChessPieceComponent {
   isWhitePiece = input(false)
-  pieceType =  input.required<"knight" | "king" | "queen"| "rook" | "bishop" | "pawn">();
+  pieceType =  input.required<"knight" | "king" | "queen"| "rook" | "bishop" | "pawn" |string>();
 
   constructor() {
   }
