@@ -31,14 +31,8 @@ constructor(private config : ChessConfigService) {
 
 }
 ngOnInit(){
+  ChessBoardModel.setupChessBoard();
   ChessBoardModel.printChessBoard();
-  //printChessCellSample();
-  printChessBoardSetup();
-  const chessPiecePawn = ChessPieceBase.createNewPiece(ChessPieceType.PAWN, ChessPieceColor.BLACK_PIECE);
-  const chessPieceRook = ChessPieceBase.createNewPiece(ChessPieceType.ROOK, ChessPieceColor.WHITE_PIECE);
-
-  console.log("Created a new Chess Piece => ", chessPiecePawn, "Piece Type =>", chessPiecePawn.pieceType);
-  console.log("Created a new Chess Piece => ", chessPieceRook, "Piece Type =>", chessPieceRook.pieceType);
 
   this.theme = this.config.getCurrentBoardConfig();
   console.log("app root theme value: => ",this.theme);
