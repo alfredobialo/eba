@@ -16,11 +16,11 @@ import {ChessRowComponent} from "./chess-row.component";
 
 
   `,
-  styles: `
+  styles: [`
     .chess-board-shadow {
       box-shadow: 2px 2px 10px 2px rgba(28, 28, 28, 0.81)
     }
-  `,
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChessBoardComponent {
