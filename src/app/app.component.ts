@@ -6,20 +6,23 @@ import {
   ChessBoardModel,
   ChessPieceBase,
   ChessPieceColor,
-  ChessPieceType,
-  printChessBoardSetup,
-  printChessCellSample
+  ChessPieceType
 } from "./shared/models/chess-board-model";
+import {NewChessBoardComponent} from "./features/components/new-chess-board.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ChessBoardComponent],
+  imports: [RouterOutlet, ChessBoardComponent, NewChessBoardComponent],
   template: `
     <div class="container-fluid" [style.background-color]="theme.bgColor">
       <div class="d-flex vh-100 justify-content-center align-items-center ">
         <eba-chess-board />
       </div>
+
+      <div class="mt-5 d-flex vh-100 justify-content-center align-items-center ">
+      <eba-new-chess-board />
+    </div>
     </div>
 
   `,
