@@ -16,13 +16,9 @@ import {NewChessBoardComponent} from "./features/components/new-chess-board.comp
   imports: [RouterOutlet, ChessBoardComponent, NewChessBoardComponent],
   template: `
     <div class="container-fluid" [style.background-color]="theme.bgColor">
-      <div class="d-flex vh-100 justify-content-center align-items-center ">
-        <eba-chess-board />
+      <div class=" d-flex vh-100 justify-content-center align-items-center ">
+        <eba-new-chess-board />
       </div>
-
-      <div class="mt-5 d-flex vh-100 justify-content-center align-items-center ">
-      <eba-new-chess-board />
-    </div>
     </div>
 
   `,
