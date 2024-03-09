@@ -416,11 +416,11 @@ export function  setupChessBoard(){
   // index 0 = black; then next index should be white
   const lettersMap = ["a", "b", "c", "d", "e", "f", "g", "h"];
   for(let i =0 ;i< arry8x8.length ; i++){
+    let isWhiteCell = i % 2  == 0;
     if(i == 0){
-      let isWhiteCell = true;
       for (let j = 0; j < arry8x8[i].length; j++){
 
-        const chessPiece = j== 0 || j == 7 ? ChessPieceBase.createNewPiece(ChessPieceType.ROOK,ChessPieceColor.BLACK_PIECE) :
+        const blackPieceOfficials = j== 0 || j == 7 ? ChessPieceBase.createNewPiece(ChessPieceType.ROOK,ChessPieceColor.BLACK_PIECE) :
             (j == 1 || j== 6 ? ChessPieceBase.createNewPiece(ChessPieceType.KNIGHT,ChessPieceColor.BLACK_PIECE):
               (j == 2 || j == 5 ? ChessPieceBase.createNewPiece(ChessPieceType.BISHOP,ChessPieceColor.BLACK_PIECE):
                 (j == 3 ? ChessPieceBase.createNewPiece(ChessPieceType.QUEEN,ChessPieceColor.BLACK_PIECE):
@@ -429,7 +429,7 @@ export function  setupChessBoard(){
 
         if(isWhiteCell){
           const cell = ChessCell.createWhiteCell(arry8x8.length-i,lettersMap[j]);
-          cell.setPiece =chessPiece;
+          cell.setPiece =blackPieceOfficials;
           arry8x8[i][j] = cell;
           // Flip the cell color so we can create alternate colors
           isWhiteCell = !isWhiteCell;
@@ -437,14 +437,35 @@ export function  setupChessBoard(){
         }
         else{
           const cell = ChessCell.createBlackCell(arry8x8.length-i,lettersMap[j]);
-          cell.setPiece =chessPiece;
+          cell.setPiece =blackPieceOfficials;
           arry8x8[i][j] = cell;
           // Flip the cell color so we can create alternate colors
           isWhiteCell = !isWhiteCell;
         }
       }
     }
-    if(i >= 2 && i <6){
+    else if (i == 6) { // Add Black Pawns
+      for (let j = 0; j < arry8x8[i].length; j++){
+
+        const cp = ChessPieceBase.createNewPiece(ChessPieceType.PAWN, ChessPieceColor.BLACK_PIECE);
+        if(isWhiteCell){
+          const cell = ChessCell.createWhiteCell(arry8x8.length-i,lettersMap[j]);
+          cell.setPiece =cp
+          arry8x8[i][j] = cell;
+          // Flip the cell color so we can create alternate colors
+          isWhiteCell = !isWhiteCell;
+
+        }
+        else{
+          const cell = ChessCell.createBlackCell(arry8x8.length-i,lettersMap[j]);
+          cell.setPiece =cp;
+          arry8x8[i][j] = cell;
+          // Flip the cell color so we can create alternate colors
+          isWhiteCell = !isWhiteCell;
+        }
+      }
+    }
+    else if(i >= 2 && i <6){
       let isWhiteCell = i % 2  == 0;
       for(let j = 0 ;j < arry8x8[i].length; j++){
         if(isWhiteCell){
@@ -458,6 +479,54 @@ export function  setupChessBoard(){
         }
       }
     }
+    else if (i == 6) { // Add Black Pawns
+      for (let j = 0; j < arry8x8[i].length; j++){
+        const cp = ChessPieceBase.createNewPiece();
+        if(isWhiteCell){
+          const cell = ChessCell.createWhiteCell(arry8x8.length-i,lettersMap[j]);
+          cell.setPiece =cp;
+          arry8x8[i][j] = cell;
+          // Flip the cell color so we can create alternate colors
+          isWhiteCell = !isWhiteCell;
+
+        }
+        else{
+          const cell = ChessCell.createBlackCell(arry8x8.length-i,lettersMap[j]);
+          cell.setPiece =cp;
+          arry8x8[i][j] = cell;
+          // Flip the cell color so we can create alternate colors
+          isWhiteCell = !isWhiteCell;
+        }
+      }
+    }
+    else if(i == 7){
+      for (let j = 0; j < arry8x8[i].length; j++){
+
+        const whitePieceOfficials = j== 0 || j == 7 ? ChessPieceBase.createNewPiece(ChessPieceType.ROOK) :
+          (j == 1 || j== 6 ? ChessPieceBase.createNewPiece(ChessPieceType.KNIGHT):
+            (j == 2 || j == 5 ? ChessPieceBase.createNewPiece(ChessPieceType.BISHOP):
+              (j == 3 ? ChessPieceBase.createNewPiece(ChessPieceType.QUEEN):
+                  ChessPieceBase.createNewPiece(ChessPieceType.KING)
+              )) );
+
+        if(isWhiteCell){
+          const cell = ChessCell.createWhiteCell(arry8x8.length-i,lettersMap[j]);
+          cell.setPiece =whitePieceOfficials;
+          arry8x8[i][j] = cell;
+          // Flip the cell color so we can create alternate colors
+          isWhiteCell = !isWhiteCell;
+
+        }
+        else{
+          const cell = ChessCell.createBlackCell(arry8x8.length-i,lettersMap[j]);
+          cell.setPiece =whitePieceOfficials;
+          arry8x8[i][j] = cell;
+          // Flip the cell color so we can create alternate colors
+          isWhiteCell = !isWhiteCell;
+        }
+      }
+    }
+
 
 
   }
