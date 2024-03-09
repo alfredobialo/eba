@@ -10,7 +10,7 @@ import {ChessRowComponent} from "./chess-row.component";
     ChessRowComponent
   ],
   template: `
-    <div class="m-2 chess-board-shadow bg-white">
+    <div class="m-2 chess-board-shadow">
       <eba-chess-row />
     </div>
 
@@ -18,7 +18,7 @@ import {ChessRowComponent} from "./chess-row.component";
   `,
   styles: `
     .chess-board-shadow {
-      box-shadow: 0 0 8px 2px rgba(56, 56, 56, 0.51)
+      box-shadow: 2px 2px 10px 2px rgba(28, 28, 28, 0.81)
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -10,27 +10,30 @@ import {ChessPieceComponent} from "./chess-piece.component";
   ],
   template: `
     <div class="user-select-none chess-cell d-flex justify-content-center align-items-center position-relative"
-         [style.background-color]="bgColor()" >
-      @if(colLabelVisible()){
+         [style.background-color]="bgColor()" [class]="{
+           'selected-black-cell': isCellSelected() && cellType() == 'black',
+           'selected-white-cell': isCellSelected() && cellType() == 'white',
+         }" (click)="handleCellSelection()">
+      @if (colLabelVisible()) {
         <span class="row-label " [style.color]="labelColor()">{{ colLabel() }}</span>
       }
 
-      @if(!isEmptyCell()){
+      @if (!isEmptyCell()) {
         <div class="chess-piece " [style.color]="cellType()">
           <eba-chess-piece [isWhitePiece]="isWhiteSector()" [pieceType]="pieceType()" />
         </div>
       }
 
-      @if(rowLabelVisible()){
+      @if (rowLabelVisible()) {
         <span class="col-label" [style.color]="labelColor()">{{ rowLetter() }}</span>
       }
 
     </div>
   `,
-  styles: `
+  styles: [`
     div.chess-cell {
-      width: 75px;
-      height: 75px;
+      width: 85px;
+      height: 85px;
     }
 
     .chess-piece {
@@ -52,7 +55,15 @@ import {ChessPieceComponent} from "./chess-piece.component";
       bottom: 0px;
       right: 4px;
     }
-  `,
+
+    .selected-white-cell {
+      background-color: rgba(204, 246, 233, 0.78) !important;
+    }
+
+    .selected-black-cell {
+      background-color: rgba(241, 241, 180, 0.65) !important;
+    }
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChessCellComponent {
@@ -63,8 +74,9 @@ export class ChessCellComponent {
   cellType = input.required<"black" | "white">();
   rowLabelVisible = input(false);
   colLabelVisible = input(false);
-  config = signal(inject(ChessConfigService).getCurrentBoardConfig());
-  pieceType = input("king");
+
+  config = signal(this.myConfig.getCurrentBoardConfig());
+  pieceType = input("");
   bgColor = computed(() => {
     return this.cellType() === "black" ? this.config().blackBgCellColor : this.config().whiteBgCellColor;
   });
@@ -73,13 +85,25 @@ export class ChessCellComponent {
   });
   lettersMap = ["a", "b", "c", "d", "e", "f", "g", "h"];
   rowLetter = computed(() => {
-    return this.lettersMap[this.colLabel()-1];  // since: we are using values 1 to 8 in the ui
+    return this.lettersMap[this.colLabel() - 1];  // since: we are using values 1 to 8 in the ui
   });
-  isWhiteSector  = computed(() => {
+  isWhiteSector = computed(() => {
     return this.cellIndex() <= 4;
   })
+  cellAddress = computed(() => {
+    return this.rowLetter() + this.colLabel();
+  });
+  isCellSelected = signal(false);
 
-  constructor() {
+  constructor(private myConfig: ChessConfigService) {
+    //myConfig.setCurrentTheme("Alvana Gray");
+  }
 
+
+  handleCellSelection() {
+    console.log("Selected Cell Address: ", this.cellAddress(), "Picece  on Cell ", this.pieceType());
+    if (this.isEmptyCell()) {
+      this.isCellSelected.set(!this.isCellSelected());
+    }
   }
 }

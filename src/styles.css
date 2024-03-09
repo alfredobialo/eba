@@ -4,7 +4,7 @@
 @import "primeng/resources/primeng.css";
 
 body{
-
+background-color : #585757;
 }
 div.chess-piece {
   width: 97%;
