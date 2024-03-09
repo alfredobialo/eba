@@ -41,7 +41,8 @@ import {IChessCell} from "../../shared/models/chess-board-model";
 
     .row-label, .col-label {
       position: absolute;
-      font-size: 0.731rem;
+      font-size: 0.89rem;
+      font-weight: bold;
     }
 
     .row-label {
@@ -62,7 +63,7 @@ import {IChessCell} from "../../shared/models/chess-board-model";
       background-color: rgba(241, 241, 180, 0.65) !important;
     }
   `],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewChessCellComponent {
 

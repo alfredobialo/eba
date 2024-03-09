@@ -354,6 +354,8 @@ export class ChessBoardModel {
           if (isWhiteCell) {
             const cell = ChessCell.createWhiteCell(this.boardSetup.length - i, lettersMap[j]);
             cell.setPiece = blackPieceOfficials;
+            cell.showColLetter = false;
+            cell.showRowNumber= j == 0;
             this.boardSetup[i][j] = cell;
             // Flip the cell color so we can create alternate colors
             isWhiteCell = !isWhiteCell;
@@ -361,6 +363,8 @@ export class ChessBoardModel {
           } else {
             const cell = ChessCell.createBlackCell(this.boardSetup.length - i, lettersMap[j]);
             cell.setPiece = blackPieceOfficials;
+            cell.showColLetter = false;
+            cell.showRowNumber= j == 0;
             this.boardSetup[i][j] = cell;
             // Flip the cell color so we can create alternate colors
             isWhiteCell = !isWhiteCell;
@@ -373,6 +377,8 @@ export class ChessBoardModel {
           if (isWhiteCell) {
             const cell = ChessCell.createWhiteCell(this.boardSetup.length - i, lettersMap[j]);
             cell.setPiece = cp
+            cell.showColLetter = false;
+            cell.showRowNumber= j == 0;
             this.boardSetup[i][j] = cell;
             // Flip the cell color so we can create alternate colors
             isWhiteCell = !isWhiteCell;
@@ -380,6 +386,8 @@ export class ChessBoardModel {
           } else {
             const cell = ChessCell.createBlackCell(this.boardSetup.length - i, lettersMap[j]);
             cell.setPiece = cp;
+            cell.showColLetter = false;
+            cell.showRowNumber= j == 0;
             this.boardSetup[i][j] = cell;
             // Flip the cell color so we can create alternate colors
             isWhiteCell = !isWhiteCell;
@@ -389,12 +397,18 @@ export class ChessBoardModel {
         let isWhiteCell = i % 2 == 0;
         for (let j = 0; j < this.boardSetup[i].length; j++) {
           if (isWhiteCell) {
-            this.boardSetup[i][j] = ChessCell.WHITE_EMPTY_CELL(this.boardSetup.length - i, lettersMap[j]);
+            const cell = ChessCell.WHITE_EMPTY_CELL(this.boardSetup.length - i, lettersMap[j]);
+            cell.showColLetter = false;
+            cell.showRowNumber= j == 0;
+            this.boardSetup[i][j] = cell;
             isWhiteCell = !isWhiteCell;
             continue;
           }
           if (!isWhiteCell) {
-            this.boardSetup[i][j] = ChessCell.BLACK_EMPTY_CELL(this.boardSetup.length - i, lettersMap[j]);
+            const cell = ChessCell.BLACK_EMPTY_CELL(this.boardSetup.length - i, lettersMap[j]);
+            cell.showColLetter = false;
+            cell.showRowNumber= j == 0;
+            this.boardSetup[i][j] = cell;
             isWhiteCell = !isWhiteCell;
           }
         }
@@ -404,6 +418,8 @@ export class ChessBoardModel {
           if (isWhiteCell) {
             const cell = ChessCell.createWhiteCell(this.boardSetup.length - i, lettersMap[j]);
             cell.setPiece = cp;
+            cell.showColLetter = false;
+            cell.showRowNumber= j == 0;
             this.boardSetup[i][j] = cell;
             // Flip the cell color so we can create alternate colors
             isWhiteCell = !isWhiteCell;
@@ -411,6 +427,8 @@ export class ChessBoardModel {
           } else {
             const cell = ChessCell.createBlackCell(this.boardSetup.length - i, lettersMap[j]);
             cell.setPiece = cp;
+            cell.showColLetter = false;
+            cell.showRowNumber= j == 0;
             this.boardSetup[i][j] = cell;
             // Flip the cell color so we can create alternate colors
             isWhiteCell = !isWhiteCell;
@@ -429,6 +447,7 @@ export class ChessBoardModel {
           if (isWhiteCell) {
             const cell = ChessCell.createWhiteCell(this.boardSetup.length - i, lettersMap[j]);
             cell.setPiece = whitePieceOfficials;
+            cell.showRowNumber = j == 0;
             this.boardSetup[i][j] = cell;
             // Flip the cell color so we can create alternate colors
             isWhiteCell = !isWhiteCell;
@@ -436,6 +455,7 @@ export class ChessBoardModel {
           } else {
             const cell = ChessCell.createBlackCell(this.boardSetup.length - i, lettersMap[j]);
             cell.setPiece = whitePieceOfficials;
+            cell.showRowNumber = j == 0;
             this.boardSetup[i][j] = cell;
             // Flip the cell color so we can create alternate colors
             isWhiteCell = !isWhiteCell;
@@ -447,7 +467,7 @@ export class ChessBoardModel {
     }
     return this.boardSetup;
   }
-
+/*
 
   static setupChessBoard2() {
     // index 0 = black; then next index should be white
@@ -455,8 +475,6 @@ export class ChessBoardModel {
     for (let i = 0; i < this.boardSetup.length; i++) {
       let isWhiteCell = i % 2 == 0;
       for (let j = 0; j < this.boardSetup[i].length; j++) {
-
-
           let cell = ChessCell.WHITE_EMPTY_CELL();
           if (isWhiteCell) {
             cell = ChessCell.createWhiteCell(this.boardSetup.length - i, lettersMap[j]);
@@ -535,5 +553,5 @@ export class ChessBoardModel {
 
     }
     return this.boardSetup;
-  }
+  }*/
 }

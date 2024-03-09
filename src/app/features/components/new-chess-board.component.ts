@@ -57,7 +57,7 @@ import {NewChessCellComponent} from "./new-chess-cell.component";
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class NewChessBoardComponent implements OnInit{
-  board = signal<IChessCell[][]>(ChessBoardModel.setupChessBoard2());
+  board = signal<IChessCell[][]>(ChessBoardModel.setupChessBoard());
   constructor() {
 
   }
