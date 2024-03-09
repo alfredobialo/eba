@@ -6,25 +6,65 @@ export enum ChessPieceColor {
   WHITE_PIECE = "WHITE",
   BLACK_PIECE = "BLACK"
 }
-
-
-
-
 export interface IChessCell {
-  isWhiteCell: boolean,
-  rowLetter?: string,
-  colNumber?: number,
-  showRowLetter: boolean,
-  showColNumber: boolean,
-
+  isWhiteCell: boolean;
+  rowLetter: string;
+  colNumber: number;
+  showRowLetter: boolean;
+  showColNumber: boolean;
+  get isEmpty(): boolean;
   getCellAddress(): string;
-
-  piece?: IChessPiece
+  get piece(): IChessPiece | null;
+  set setPiece(chessPiece :IChessPiece);
 }
 
+export abstract class ChessCell implements IChessCell{
+    isWhiteCell: boolean = true;
+    rowLetter: string ="a";
+    colNumber: number = 1;
+    showRowLetter: boolean = true;
+    showColNumber: boolean = true;
+    protected chessPiece  :IChessPiece | null = null;
+    get isEmpty(): boolean {
+        return this.piece === null;
+    }
+    getCellAddress(): string {
+        return `${this.rowLetter}${this.colNumber}`;
+    }
+    get piece(): IChessPiece | null {
+        return this.chessPiece;
+    }
+    set setPiece(chessPiece: IChessPiece) {
+        this.chessPiece = chessPiece;
+    }
+
+    public static createBlackChessCell(piece: IChessPiece | null = null, colNumber : number = 1, rowLetter: string = "a"):IChessCell{
+      const cell   = new BlackChessCell(colNumber,rowLetter);
+      cell.chessPiece = piece;
+      return cell;
+    }
+
+}
+/*chessPiece: IChessPiece | null = null,*/
+export class BlackChessCell extends ChessCell{
+  constructor(colNumber:number = 1, rowLetter:string ="a") {
+    super();
+    this.colNumber = colNumber;
+    this.rowLetter = rowLetter;
+    this.isWhiteCell = false;
+  }
+}
+export class WhiteChessCell extends ChessCell{
+  constructor(colNumber:number = 1, rowLetter:string ="a") {
+    super();
+    this.colNumber = colNumber;
+    this.rowLetter = rowLetter;
+    this.isWhiteCell = true;
+  }
+}
 export interface IChessPiece {
   point: number,
-
+  get notation():string;
   getPieceType(): string;
 
   pieceImageCss?: string;
@@ -44,6 +84,7 @@ export interface IChessPiece {
 }
 
 export abstract class ChessPieceBase implements IChessPiece {
+
   isKnight(): boolean {
     return this.getPieceType() === ChessPieceType.KNIGHT;
   }
@@ -82,6 +123,24 @@ export abstract class ChessPieceBase implements IChessPiece {
 
     this.pieceImageCss = pieceColor + "-piece " + pieceType; // sample css class= white-piece white-pawn
   }
+  get notation(): string {
+    switch (this.getPieceType()){
+      case ChessPieceType.PAWN:
+        return "";
+        case ChessPieceType.KNIGHT:
+        return this.isWhite ? "N" : "n";
+        case ChessPieceType.BISHOP:
+        return this.isWhite ? "B" : "b";
+        case ChessPieceType.ROOK:
+        return this.isWhite ? "R" : "r";
+      case ChessPieceType.QUEEN:
+        return this.isWhite ? "Q" : "q";
+      case ChessPieceType.KING:
+        return this.isWhite ? "K" : "k";
+      default :
+        return "";
+    }
+  }
 
   public static createNewPiece(pieceType: ChessPieceType = ChessPieceType.PAWN, pieceColor: ChessPieceColor = ChessPieceColor.WHITE_PIECE): IChessPiece {
 
@@ -99,8 +158,6 @@ export abstract class ChessPieceBase implements IChessPiece {
         return new QueenChessPiece(isWhitePiece);
       case ChessPieceType.KING:
         return new KingChessPiece(isWhitePiece);
-
-
     }
 
   }
