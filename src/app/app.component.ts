@@ -2,7 +2,14 @@ import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {ChessBoardComponent} from "./features/components/chess-board/chess-board.component";
 import {ChessConfigService} from "./features/components/chess-board/ChessConfig";
-import {ChessBoardModel, ChessPieceBase, ChessPieceColor, ChessPieceType, printChessCellSample} from "./shared/models/chess-board-model";
+import {
+  ChessBoardModel,
+  ChessPieceBase,
+  ChessPieceColor,
+  ChessPieceType,
+  printChessBoardSetup,
+  printChessCellSample
+} from "./shared/models/chess-board-model";
 
 @Component({
   selector: 'app-root',
@@ -25,8 +32,8 @@ constructor(private config : ChessConfigService) {
 }
 ngOnInit(){
   ChessBoardModel.printChessBoard();
-  printChessCellSample();
-
+  //printChessCellSample();
+  printChessBoardSetup();
   const chessPiecePawn = ChessPieceBase.createNewPiece(ChessPieceType.PAWN, ChessPieceColor.BLACK_PIECE);
   const chessPieceRook = ChessPieceBase.createNewPiece(ChessPieceType.ROOK, ChessPieceColor.WHITE_PIECE);
 

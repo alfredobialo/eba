@@ -58,6 +58,16 @@ export abstract class ChessCell implements IChessCell{
     cell.chessPiece = piece;
     return cell;
   }
+  public static createWhiteCell(rowNumber : number , colLetter: string = "a"):IChessCell{
+    const cell   = new WhiteChessCell(rowNumber,colLetter);
+    cell.chessPiece = null;
+    return cell;
+  }
+  public static createBlackCell(rowNumber : number , colLetter: string = "a"):IChessCell{
+    const cell   = new BlackChessCell(rowNumber,colLetter);
+    cell.chessPiece = null;
+    return cell;
+  }
 }
 /*chessPiece: IChessPiece | null = null,*/
 export class BlackChessCell extends ChessCell{
@@ -323,15 +333,14 @@ export class ChessBoardModel {
 export const arry8x8 = [
   [
     //Black Officials
-    ChessCell.createWhiteChessCell(ChessPieceBase.createNewPiece(ChessPieceType.ROOK, ChessPieceColor.BLACK_PIECE),8,"a"),
-    ChessCell.createBlackChessCell(ChessPieceBase.createNewPiece(ChessPieceType.KNIGHT, ChessPieceColor.BLACK_PIECE),8,"b"),
-    ChessCell.createWhiteChessCell(ChessPieceBase.createNewPiece(ChessPieceType.BISHOP, ChessPieceColor.BLACK_PIECE),8,"c"),
-    ChessCell.createBlackChessCell(ChessPieceBase.createNewPiece(ChessPieceType.QUEEN, ChessPieceColor.BLACK_PIECE),8,"d"),
-    ChessCell.createWhiteChessCell(ChessPieceBase.createNewPiece(ChessPieceType.KING, ChessPieceColor.BLACK_PIECE),8,"e"),
-    ChessCell.createBlackChessCell(ChessPieceBase.createNewPiece(ChessPieceType.BISHOP, ChessPieceColor.BLACK_PIECE),8,"f"),
-    ChessCell.createWhiteChessCell(ChessPieceBase.createNewPiece(ChessPieceType.KNIGHT, ChessPieceColor.BLACK_PIECE),8,"g"),
-    ChessCell.createBlackChessCell(ChessPieceBase.createNewPiece(ChessPieceType.ROOK, ChessPieceColor.BLACK_PIECE),8,"h")
-  ],
+    ChessCell.WHITE_EMPTY_CELL(),
+    ChessCell.WHITE_EMPTY_CELL(),
+    ChessCell.WHITE_EMPTY_CELL(),
+    ChessCell.WHITE_EMPTY_CELL(),
+    ChessCell.WHITE_EMPTY_CELL(),
+    ChessCell.WHITE_EMPTY_CELL(),
+    ChessCell.WHITE_EMPTY_CELL(),
+    ChessCell.WHITE_EMPTY_CELL(),],
   // Black Pawns
   [ChessCell.createBlackChessCell(ChessPieceBase.createNewPiece(ChessPieceType.PAWN),7,"a"),
     ChessCell.createWhiteChessCell(ChessPieceBase.createNewPiece(ChessPieceType.PAWN),7,"b"),
@@ -398,4 +407,59 @@ export function  fillChessCellsWithEmpties(){
 export  function printChessCellSample(){
   fillChessCellsWithEmpties();
   console.log("Sample Chess Cells: => " , arry8x8);
+}
+export  function printChessBoardSetup(){
+  setupChessBoard();
+  console.log("Chess Board Setup: => " , arry8x8);
+}
+export function  setupChessBoard(){
+  // index 0 = black; then next index should be white
+  const lettersMap = ["a", "b", "c", "d", "e", "f", "g", "h"];
+  for(let i =0 ;i< arry8x8.length ; i++){
+    if(i == 0){
+      let isWhiteCell = true;
+      for (let j = 0; j < arry8x8[i].length; j++){
+
+        const chessPiece = j== 0 || j == 7 ? ChessPieceBase.createNewPiece(ChessPieceType.ROOK,ChessPieceColor.BLACK_PIECE) :
+            (j == 1 || j== 6 ? ChessPieceBase.createNewPiece(ChessPieceType.KNIGHT,ChessPieceColor.BLACK_PIECE):
+              (j == 2 || j == 5 ? ChessPieceBase.createNewPiece(ChessPieceType.BISHOP,ChessPieceColor.BLACK_PIECE):
+                (j == 3 ? ChessPieceBase.createNewPiece(ChessPieceType.QUEEN,ChessPieceColor.BLACK_PIECE):
+                    ChessPieceBase.createNewPiece(ChessPieceType.KING,ChessPieceColor.BLACK_PIECE)
+                )) );
+
+        if(isWhiteCell){
+          const cell = ChessCell.createWhiteCell(arry8x8.length-i,lettersMap[j]);
+          cell.setPiece =chessPiece;
+          arry8x8[i][j] = cell;
+          // Flip the cell color so we can create alternate colors
+          isWhiteCell = !isWhiteCell;
+
+        }
+        else{
+          const cell = ChessCell.createBlackCell(arry8x8.length-i,lettersMap[j]);
+          cell.setPiece =chessPiece;
+          arry8x8[i][j] = cell;
+          // Flip the cell color so we can create alternate colors
+          isWhiteCell = !isWhiteCell;
+        }
+      }
+    }
+    if(i >= 2 && i <6){
+      let isWhiteCell = i % 2  == 0;
+      for(let j = 0 ;j < arry8x8[i].length; j++){
+        if(isWhiteCell){
+          arry8x8[i][j] = ChessCell.WHITE_EMPTY_CELL(arry8x8.length-i,lettersMap[j]);
+          isWhiteCell = !isWhiteCell;
+          continue;
+        }
+        if(!isWhiteCell){
+          arry8x8[i][j] = ChessCell.BLACK_EMPTY_CELL(arry8x8.length-i,lettersMap[j]);
+          isWhiteCell = !isWhiteCell;
+        }
+      }
+    }
+
+
+  }
+
 }
