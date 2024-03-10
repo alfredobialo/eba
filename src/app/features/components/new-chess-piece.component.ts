@@ -13,7 +13,7 @@ import {IChessPiece} from "../../shared/models/chess-board-model";
       cursor:pointer;
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class NewChessPieceComponent {
   piece = input.required<IChessPiece | null>();

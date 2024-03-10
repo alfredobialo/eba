@@ -20,7 +20,7 @@ export interface IChessCell {
 
   get piece(): IChessPiece | null;
 
-  set setPiece(chessPiece: IChessPiece);
+  set setPiece(chessPiece: IChessPiece | null);
 }
 
 export abstract class ChessCell implements IChessCell {
@@ -43,7 +43,7 @@ export abstract class ChessCell implements IChessCell {
     return this.chessPiece;
   }
 
-  set setPiece(chessPiece: IChessPiece) {
+  set setPiece(chessPiece: IChessPiece | null) {
     this.chessPiece = chessPiece;
   }
 

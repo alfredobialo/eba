@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, computed, inject, input, signal, effect} from '@angular/core';
-import {ChessConfigService}  from "./chess-board/ChessConfig";
+import {ChangeDetectionStrategy, Component, computed, input, signal} from '@angular/core';
+import {ChessConfigService} from "./chess-board/ChessConfig";
 import {NewChessPieceComponent} from "./new-chess-piece.component";
 import {IChessCell} from "../../shared/models/chess-board-model";
 
@@ -11,7 +11,7 @@ import {IChessCell} from "../../shared/models/chess-board-model";
   ],
   template: `
     <div class="user-select-none chess-cell d-flex justify-content-center align-items-center position-relative"
-         [style.background-color]="bgColor()"  >
+         [style.background-color]="bgColor()" (click)="handleCellClick(cellInfo())"  >
       @if (cellInfo().showRowNumber) {
         <span class="row-label " [style.color]="labelColor()">{{ cellInfo().rowNumber }}</span>
       }
@@ -87,4 +87,8 @@ export class NewChessCellComponent {
   }
 
 
+  handleCellClick(cell: IChessCell) {
+    console.log("CELL CLICKED => Cell Address", cell.getCellAddress() , "piece type => ", cell?.piece?.pieceType,
+      " :PIECE POINT => ", cell?.piece?.point, " :Piece Color => ", cell?.piece?.isWhite ? "WHITE" : "BLACK")
+  }
 }

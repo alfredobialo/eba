@@ -3,10 +3,7 @@ import {RouterOutlet} from '@angular/router';
 import {ChessBoardComponent} from "./features/components/chess-board/chess-board.component";
 import {ChessConfigService} from "./features/components/chess-board/ChessConfig";
 import {
-  ChessBoardModel,
-  ChessPieceBase,
-  ChessPieceColor,
-  ChessPieceType
+  ChessBoardModel
 } from "./shared/models/chess-board-model";
 import {NewChessBoardComponent} from "./features/components/new-chess-board.component";
 
