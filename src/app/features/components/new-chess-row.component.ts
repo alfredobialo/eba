@@ -10,8 +10,8 @@ import {IChessCell} from "../../shared/models/chess-board-model";
   ],
   template: `
     <div class="d-flex justify-content-start ">
-      @for (c of [0, 1, 2, 3, 4, 5, 6, 7]; track c) {
-        <eba-new-chess-cell [cellInfo]="boardRow()[$index]" />
+      @for (c of boardRow()[rowIndex()]; track c) {
+        <eba-new-chess-cell [cellInfo]="boardRow()[rowIndex()][$index]" />
       }
     </div>
   `,
@@ -19,6 +19,6 @@ import {IChessCell} from "../../shared/models/chess-board-model";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewChessRowComponent {
-  boardRow = input.required<IChessCell[]>();
-
+  boardRow = input.required<IChessCell[][]>();
+  rowIndex = input.required<number>();
 }
