@@ -75,7 +75,7 @@ export class ChessCellComponent {
   rowLabelVisible = input(false);
   colLabelVisible = input(false);
 
-  config = signal(this.myConfig.getCurrentBoardConfig());
+  config = this.myConfig.getCurrentBoardConfig();
   pieceType = input("");
   bgColor = computed(() => {
     return this.cellType() === "black" ? this.config().blackBgCellColor : this.config().whiteBgCellColor;

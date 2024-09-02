@@ -30,8 +30,8 @@ import {IChessCell} from "../../shared/models/chess-board-model";
   `,
   styles: [`
     div.chess-cell {
-      width: 85px;
-      height: 85px;
+      width: 100px;
+      height: 100px;
     }
 
     .chess-piece {
@@ -68,7 +68,7 @@ import {IChessCell} from "../../shared/models/chess-board-model";
 export class NewChessCellComponent {
 
   cellInfo = input.required<IChessCell>();
-  config = signal(this.myConfig.getCurrentBoardConfig());
+  config =  this.myConfig.getCurrentBoardConfig();
 
   pieceType = computed(() =>{
     return this.cellInfo().piece;

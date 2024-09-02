@@ -1,10 +1,14 @@
-import { Component, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {ChessBoardModel, IChessCell} from "../../shared/models/chess-board-model";
 import {NewChessCellComponent} from "./new-chess-cell.component";
+import {DropdownChangeEvent, DropdownModule} from "primeng/dropdown";
+import {ChessConfigService} from "./chess-board/ChessConfig";
+import {FormsModule} from "@angular/forms";
+
 @Component({
   selector: 'eba-new-chess-board',
   standalone: true,
-  imports: [NewChessCellComponent],
+  imports: [NewChessCellComponent, DropdownModule,FormsModule],
   template: `
 <div class="m-2 chess-board-shadow">
   @for(row of [0,1,2,3,4,5,6,7]; track row){
@@ -17,6 +21,14 @@ import {NewChessCellComponent} from "./new-chess-cell.component";
 
 </div>
 <div class="mt-3 d-flex gap-3 justify-content-center align-items-center p-3">
+  <select name="cboThemes" id="cboThemes" [(ngModel)]="selectedTheme" class="form-select-lg form-select w-50 "
+   (change)="setTheme($event)">
+    @for( opt of themeList; track opt.themeName){
+      <option [ngValue]="opt">{{ opt.themeName }}</option>
+    }
+
+  </select>
+
   <button class="btn btn-dark btn-lg" (click)="makeDemoMove()">Make a Move</button>
   <button class="btn btn-primary btn-lg" (click)="resetBoard()">Reset Board</button>
 </div>
@@ -31,10 +43,14 @@ import {NewChessCellComponent} from "./new-chess-cell.component";
 })
 export class NewChessBoardComponent implements OnInit{
   board = signal<IChessCell[][]>(ChessBoardModel.setupChessBoard());
+  private chessConfigService  = inject(ChessConfigService);
+  themeList: any[] = [];
+  selectedTheme : any  = this.chessConfigService.getCurrentBoardConfig()();
   constructor() {
 
   }
     ngOnInit(): void {
+      this.themeList = this.chessConfigService.getAllTheme();
       console.log("COMPONENT BOARD : ",this.board())
     }
 
@@ -131,4 +147,11 @@ export class NewChessBoardComponent implements OnInit{
   resetBoard() {
       this.board.set(ChessBoardModel.setupChessBoard());
   }
+
+  setTheme(evt: Event) {
+    console.log(evt, "DropDownChange Event Fires",this.selectedTheme);
+    this.chessConfigService.setCurrentTheme(this.selectedTheme?.themeName);
+
+  }
+
 }
