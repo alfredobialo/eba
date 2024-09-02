@@ -2,16 +2,19 @@ import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {ChessBoardComponent} from "./features/components/chess-board/chess-board.component";
 import {ChessConfigService} from "./features/components/chess-board/ChessConfig";
-import {ChessBoardModel, ChessPieceBase, ChessPieceColor, ChessPieceType, printChessCellSample} from "./shared/models/chess-board-model";
+import {
+  ChessBoardModel
+} from "./shared/models/chess-board-model";
+import {NewChessBoardComponent} from "./features/components/new-chess-board.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ChessBoardComponent],
+  imports: [RouterOutlet, ChessBoardComponent, NewChessBoardComponent],
   template: `
     <div class="container-fluid" [style.background-color]="theme.bgColor">
-      <div class="d-flex vh-100 justify-content-center align-items-center ">
-        <eba-chess-board />
+      <div class=" d-flex min-vh-100 justify-content-center align-items-center ">
+        <eba-new-chess-board />
       </div>
     </div>
 
@@ -24,14 +27,8 @@ constructor(private config : ChessConfigService) {
 
 }
 ngOnInit(){
+  ChessBoardModel.setupChessBoard();
   ChessBoardModel.printChessBoard();
-  printChessCellSample();
-
-  const chessPiecePawn = ChessPieceBase.createNewPiece(ChessPieceType.PAWN, ChessPieceColor.BLACK_PIECE);
-  const chessPieceRook = ChessPieceBase.createNewPiece(ChessPieceType.ROOK, ChessPieceColor.WHITE_PIECE);
-
-  console.log("Created a new Chess Piece => ", chessPiecePawn, "Piece Type =>", chessPiecePawn.pieceType);
-  console.log("Created a new Chess Piece => ", chessPieceRook, "Piece Type =>", chessPieceRook.pieceType);
 
   this.theme = this.config.getCurrentBoardConfig();
   console.log("app root theme value: => ",this.theme);
