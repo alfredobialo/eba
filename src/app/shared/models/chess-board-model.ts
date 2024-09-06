@@ -1,3 +1,5 @@
+//import {ChessPieceBase} from "./chess-piece-base";
+
 export enum ChessPieceType {
   PAWN = "Pawn", QUEEN = "Queen", KING = "King", KNIGHT = "Knight", BISHOP = "Bishop", ROOK = "Rook"
 }

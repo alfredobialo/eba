@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, input, signal} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, signal,output } from '@angular/core';
 import {ChessConfigService} from "./chess-board/ChessConfig";
 import {NewChessPieceComponent} from "./new-chess-piece.component";
 import {IChessCell} from "../../shared/models/chess-board-model";
@@ -10,8 +10,11 @@ import {IChessCell} from "../../shared/models/chess-board-model";
     NewChessPieceComponent
   ],
   template: `
-    <div class="user-select-none chess-cell d-flex justify-content-center align-items-center position-relative"
-         [style.background-color]="bgColor()" (click)="handleCellClick(cellInfo())"  >
+    <div class="user-select-none chess-cell d-flex justify-content-center align-items-center position-relative "
+         [style.background-color]="bgColor()" (click)="handleCellClick(cellInfo())"
+        (contextmenu)="handleRightClick($event)"
+
+         [class.show-ring]="cellSelected()" >
       @if (cellInfo().showRowNumber) {
         <span class="row-label " [style.color]="labelColor()">{{ cellInfo().rowNumber }}</span>
       }
@@ -28,10 +31,20 @@ import {IChessCell} from "../../shared/models/chess-board-model";
 
     </div>
   `,
-  styles: [`
+  styles: `
     div.chess-cell {
       width: 100px;
       height: 100px;
+
+    }
+
+    div.chess-cell.show-ring::before{
+      content:"";
+      position :absolute;
+      height: 94px;
+      width: 94px;
+      border-radius: 50%;
+      box-shadow : 0 0 0 4px #ef0000
     }
 
     .chess-piece {
@@ -62,11 +75,13 @@ import {IChessCell} from "../../shared/models/chess-board-model";
     .selected-black-cell {
       background-color: rgba(241, 241, 180, 0.65) !important;
     }
-  `],
+  `,
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewChessCellComponent {
 
+  cellSelected  = signal(false);
+  cellClicked = output<IChessCell>();
   cellInfo = input.required<IChessCell>();
   config =  this.myConfig.getCurrentBoardConfig();
 
@@ -88,7 +103,18 @@ export class NewChessCellComponent {
 
 
   handleCellClick(cell: IChessCell) {
-    console.log("CELL CLICKED => Cell Address", cell.getCellAddress() , "piece type => ", cell?.piece?.pieceType,
-      " :PIECE POINT => ", cell?.piece?.point, " :Piece Color => ", cell?.piece?.isWhite ? "WHITE" : "BLACK")
+    this.cellClicked.emit(cell);
+    this.cellSelected.set(false);
+    // console.log("CELL CLICKED => Cell Address", cell.getCellAddress() , "piece type => ", cell?.piece?.pieceType,
+    //   " :PIECE POINT => ", cell?.piece?.point, " :Piece Color => ", cell?.piece?.isWhite ? "WHITE" : "BLACK")
   }
+  handleRightClick(evt: MouseEvent) {
+console.log("Mouse Event ", evt);
+
+    if(evt.button > 0 ){
+      evt.preventDefault();
+      this.cellSelected.update((x) => x = !x)  ;
+    }
+}
+
 }
