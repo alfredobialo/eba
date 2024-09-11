@@ -1,20 +1,20 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {ChessBoardModel, IChessCell} from "../../shared/models/chess-board-model";
+import {ChessBoardModel} from "../../shared/models/chess-board-model";
+import { IChessCell } from "../../shared/models/IChessCell";
 import {NewChessCellComponent} from "./new-chess-cell.component";
-import {DropdownChangeEvent, DropdownModule} from "primeng/dropdown";
 import {ChessConfigService} from "./chess-board/ChessConfig";
 import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'eba-new-chess-board',
   standalone: true,
-  imports: [NewChessCellComponent, DropdownModule,FormsModule],
+  imports: [NewChessCellComponent,FormsModule],
   template: `
-<div class="m-2 chess-board-shadow">
+<div class="m-2 chess-board-shadow" >
   @for(row of [0,1,2,3,4,5,6,7]; track row){
     <div class="d-flex justify-content-start ">
       @for (c of board()[row]; track c.getCellAddress()) {
-        <eba-new-chess-cell [cellInfo]="board()[row][$index]" />
+        <eba-new-chess-cell [cellInfo]="board()[row][$index]" (cellClicked)="handleBoardClick($event)"  />
       }
     </div>
   }
@@ -24,7 +24,13 @@ import {FormsModule} from "@angular/forms";
   <select name="cboThemes" id="cboThemes" [(ngModel)]="selectedTheme" class="form-select-lg form-select w-50 "
    (change)="setTheme($event)">
     @for( opt of themeList; track opt.themeName){
-      <option [ngValue]="opt">{{ opt.themeName }}</option>
+      @if(opt.themeName === selectedTheme.themeName){
+        <option [ngValue]="opt" selected  > ==> {{ opt.themeName }} <==</option>
+      }
+      @else{
+        <option [ngValue]="opt">{{ opt.themeName }}</option>
+      }
+
     }
 
   </select>
@@ -42,16 +48,18 @@ import {FormsModule} from "@angular/forms";
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewChessBoardComponent implements OnInit{
+
   board = signal<IChessCell[][]>(ChessBoardModel.setupChessBoard());
   private chessConfigService  = inject(ChessConfigService);
   themeList: any[] = [];
-  selectedTheme : any  = this.chessConfigService.getCurrentBoardConfig()();
+  selectedTheme : any  = {} ;
   constructor() {
 
   }
     ngOnInit(): void {
       this.themeList = this.chessConfigService.getAllTheme();
       console.log("COMPONENT BOARD : ",this.board())
+    this.selectedTheme  = this.chessConfigService.getCurrentBoardConfig()();
     }
 
   makeDemoMove() {
@@ -149,9 +157,12 @@ export class NewChessBoardComponent implements OnInit{
   }
 
   setTheme(evt: Event) {
-    console.log(evt, "DropDownChange Event Fires",this.selectedTheme);
+
     this.chessConfigService.setCurrentTheme(this.selectedTheme?.themeName);
 
   }
-
+  handleBoardClick($event: IChessCell) {
+   // remove all circular ring in cells if set
+      console.log("Cell Clicked On => ", $event);
+  }
 }

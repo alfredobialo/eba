@@ -5,7 +5,7 @@ export class ChessConfigService {
 
   private   allThemes = [
     {
-      themeName: "Marron-Brown",
+      themeName: "Lichess.com",
       blackBgCellColor: "#b48762",
       blackCellBgStyle: "",
       blackCellColor: "#dfbdab",
