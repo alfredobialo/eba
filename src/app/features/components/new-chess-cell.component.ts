@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal,output } from '@angular/core';
 import {ChessConfigService} from "./chess-board/ChessConfig";
 import {NewChessPieceComponent} from "./new-chess-piece.component";
-import {IChessCell} from "../../shared/models/chess-board-model";
+import { IChessCell } from "../../shared/models/IChessCell";
 
 @Component({
   selector: 'eba-new-chess-cell',

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, effect, input} from '@angular/core';
-import {IChessPiece} from "../../shared/models/chess-board-model";
+import { IChessPiece } from "../../shared/models/IChessPiece";
 
 @Component({
   selector: 'eba-new-chess-piece',

@@ -1,4 +1,14 @@
-/*
+import { RookChessPiece } from "./RookChessPiece";
+import { KingChessPiece } from "./KingChessPiece";
+import { QueenChessPiece } from "./QueenChessPiece";
+import { BishopChessPiece } from "./BishopChessPiece";
+import { KnightChessPiece } from "./KnightChessPiece";
+import { PawnChessPiece } from "./PawnChessPiece";
+import { ChessPieceColor } from "../ChessPieceColor";
+import { ChessPieceType } from "../ChessPieceType";
+import { IChessPiece } from "../IChessPiece";
+
+
 export abstract class ChessPieceBase implements IChessPiece {
   public get pieceType(): string {
     return this.getPieceType();
@@ -30,7 +40,7 @@ export abstract class ChessPieceBase implements IChessPiece {
 
   point: number = 1;
 
-  abstract getPieceType(): string
+  abstract getPieceType(): string;
 
   pieceImageCss: string = "";
   isWhite: boolean = true;
@@ -57,7 +67,7 @@ export abstract class ChessPieceBase implements IChessPiece {
         return this.isWhite ? "Q" : "q";
       case ChessPieceType.KING:
         return this.isWhite ? "K" : "k";
-      default :
+      default:
         return "";
     }
   }
@@ -84,5 +94,3 @@ export abstract class ChessPieceBase implements IChessPiece {
 
 
 }
-
-*/

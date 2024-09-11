@@ -1,5 +1,6 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {ChessBoardModel, IChessCell} from "../../shared/models/chess-board-model";
+import {ChessBoardModel} from "../../shared/models/chess-board-model";
+import { IChessCell } from "../../shared/models/IChessCell";
 import {NewChessCellComponent} from "./new-chess-cell.component";
 import {ChessConfigService} from "./chess-board/ChessConfig";
 import {FormsModule} from "@angular/forms";
