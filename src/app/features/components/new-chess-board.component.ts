@@ -6,6 +6,10 @@ import {ChessConfigService} from "./chess-board/ChessConfig";
 import {FormsModule} from "@angular/forms";
 
 @Component({
+  host : {
+    "[class.chess-board-flip-test]":  "flipBoard",
+    "(dblclick)" : "flipBoardHandler()"
+  },
   selector: 'eba-new-chess-board',
   standalone: true,
   imports: [NewChessCellComponent,FormsModule],
@@ -44,6 +48,8 @@ import {FormsModule} from "@angular/forms";
     .chess-board-shadow {
       box-shadow: 2px 2px 10px 2px rgba(28, 28, 28, 0.81)
     }
+
+
   `,
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -53,6 +59,7 @@ export class NewChessBoardComponent implements OnInit{
   private chessConfigService  = inject(ChessConfigService);
   themeList: any[] = [];
   selectedTheme : any  = {} ;
+  flipBoard = false;
   constructor() {
 
   }
@@ -154,6 +161,11 @@ export class NewChessBoardComponent implements OnInit{
 
   resetBoard() {
       this.board.set(ChessBoardModel.setupChessBoard());
+  }
+
+  protected flipBoardHandler(){
+    //this.flipBoard = !this.flipBoard;
+    console.log("Flip Board Called", this.flipBoard)
   }
 
   setTheme(evt: Event) {

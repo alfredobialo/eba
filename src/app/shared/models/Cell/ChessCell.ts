@@ -1,10 +1,10 @@
-import { BlackChessCell } from "./BlackChessCell";
+
 import { IChessCell } from "../IChessCell";
 import { IChessPiece } from "../IChessPiece";
-import { WhiteChessCell } from "./WhiteChessCell";
 
 
-export abstract class ChessCell implements IChessCell {
+
+export  class ChessCell implements IChessCell {
   isWhiteCell: boolean = true;
   colLetter: string = "a";
   rowNumber: number = 1;
@@ -62,5 +62,22 @@ export abstract class ChessCell implements IChessCell {
     const cell = new BlackChessCell(rowNumber, colLetter);
     cell.chessPiece = null;
     return cell;
+  }
+}
+export class WhiteChessCell extends ChessCell {
+  constructor(rowNumber: number = 1, colLetter: string = "a") {
+    super();
+    this.rowNumber = rowNumber;
+    this.colLetter = colLetter;
+    this.isWhiteCell = true;
+  }
+}
+
+export class BlackChessCell extends ChessCell {
+  constructor(rowNumber: number = 1, colLetter: string = "a") {
+    super();
+    this.rowNumber = rowNumber;
+    this.colLetter = colLetter;
+    this.isWhiteCell = false;
   }
 }

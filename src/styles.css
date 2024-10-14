@@ -76,3 +76,22 @@ div.white-piece.white-knight{
   background-position: center center;
   background-size: contain;
 }
+
+.chess-board-flip{
+  animation : flip-board-animation 3s linear ;
+  animation-fill-mode: forwards
+}
+
+
+@keyframes flip-board-animation{
+  0% {}
+  50%{
+    transform: scale(1.3) ;
+
+    opacity: 0.6;
+  }
+  100% {
+    opacity:1;
+    transform: rotate(0.5turn);
+  }
+}

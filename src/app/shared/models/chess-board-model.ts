@@ -1,5 +1,5 @@
 import { ChessCell } from "./Cell/ChessCell";
-import { ChessPieceBase } from "./Piece/ChessPieceBase";
+import { createNewChessPiece } from "./Piece/createNewChessPiece";
 import { ChessPieceColor } from "./ChessPieceColor";
 import { ChessPieceType } from "./ChessPieceType";
 
@@ -49,11 +49,11 @@ export class ChessBoardModel {
       if (i == 0) {
         for (let j = 0; j < this.boardSetup[i].length; j++) {
 
-          const blackPieceOfficials = j == 0 || j == 7 ? ChessPieceBase.createNewPiece(ChessPieceType.ROOK, ChessPieceColor.BLACK_PIECE) :
-            (j == 1 || j == 6 ? ChessPieceBase.createNewPiece(ChessPieceType.KNIGHT, ChessPieceColor.BLACK_PIECE) :
-              (j == 2 || j == 5 ? ChessPieceBase.createNewPiece(ChessPieceType.BISHOP, ChessPieceColor.BLACK_PIECE) :
-                (j == 3 ? ChessPieceBase.createNewPiece(ChessPieceType.QUEEN, ChessPieceColor.BLACK_PIECE) :
-                    ChessPieceBase.createNewPiece(ChessPieceType.KING, ChessPieceColor.BLACK_PIECE)
+          const blackPieceOfficials = j == 0 || j == 7 ? createNewChessPiece(ChessPieceType.ROOK, ChessPieceColor.BLACK_PIECE) :
+            (j == 1 || j == 6 ? createNewChessPiece(ChessPieceType.KNIGHT, ChessPieceColor.BLACK_PIECE) :
+              (j == 2 || j == 5 ? createNewChessPiece(ChessPieceType.BISHOP, ChessPieceColor.BLACK_PIECE) :
+                (j == 3 ? createNewChessPiece(ChessPieceType.QUEEN, ChessPieceColor.BLACK_PIECE) :
+                    createNewChessPiece(ChessPieceType.KING, ChessPieceColor.BLACK_PIECE)
                 )));
 
           if (isWhiteCell) {
@@ -78,7 +78,7 @@ export class ChessBoardModel {
       } else if (i == 1) { // Add Black Pawns
         for (let j = 0; j < this.boardSetup[i].length; j++) {
 
-          const cp = ChessPieceBase.createNewPiece(ChessPieceType.PAWN, ChessPieceColor.BLACK_PIECE);
+          const cp = createNewChessPiece(ChessPieceType.PAWN, ChessPieceColor.BLACK_PIECE);
           if (isWhiteCell) {
             const cell = ChessCell.createWhiteCell(this.boardSetup.length - i, lettersMap[j]);
             cell.setPiece = cp
@@ -119,7 +119,7 @@ export class ChessBoardModel {
         }
       } else if (i == 6) { // Add Black Pawns
         for (let j = 0; j < this.boardSetup[i].length; j++) {
-          const cp = ChessPieceBase.createNewPiece();
+          const cp = createNewChessPiece();
           if (isWhiteCell) {
             const cell = ChessCell.createWhiteCell(this.boardSetup.length - i, lettersMap[j]);
             cell.setPiece = cp;
@@ -142,11 +142,11 @@ export class ChessBoardModel {
       } else if (i == 7) {
         for (let j = 0; j < this.boardSetup[i].length; j++) {
 
-          const whitePieceOfficials = j == 0 || j == 7 ? ChessPieceBase.createNewPiece(ChessPieceType.ROOK) :
-            (j == 1 || j == 6 ? ChessPieceBase.createNewPiece(ChessPieceType.KNIGHT) :
-              (j == 2 || j == 5 ? ChessPieceBase.createNewPiece(ChessPieceType.BISHOP) :
-                (j == 3 ? ChessPieceBase.createNewPiece(ChessPieceType.QUEEN) :
-                    ChessPieceBase.createNewPiece(ChessPieceType.KING)
+          const whitePieceOfficials = j == 0 || j == 7 ? createNewChessPiece(ChessPieceType.ROOK) :
+            (j == 1 || j == 6 ? createNewChessPiece(ChessPieceType.KNIGHT) :
+              (j == 2 || j == 5 ? createNewChessPiece(ChessPieceType.BISHOP) :
+                (j == 3 ? createNewChessPiece(ChessPieceType.QUEEN) :
+                    createNewChessPiece(ChessPieceType.KING)
                 )));
 
           if (isWhiteCell) {
@@ -191,17 +191,17 @@ export class ChessBoardModel {
             isWhiteCell = !isWhiteCell;
           }
           if(i == 0){
-            const blackPieceOfficials = j == 0 || j == 7 ? ChessPieceBase.createNewPiece(ChessPieceType.ROOK, ChessPieceColor.BLACK_PIECE) :
-              (j == 1 || j == 6 ? ChessPieceBase.createNewPiece(ChessPieceType.KNIGHT, ChessPieceColor.BLACK_PIECE) :
-                (j == 2 || j == 5 ? ChessPieceBase.createNewPiece(ChessPieceType.BISHOP, ChessPieceColor.BLACK_PIECE) :
-                  (j == 3 ? ChessPieceBase.createNewPiece(ChessPieceType.QUEEN, ChessPieceColor.BLACK_PIECE) :
-                      ChessPieceBase.createNewPiece(ChessPieceType.KING, ChessPieceColor.BLACK_PIECE)
+            const blackPieceOfficials = j == 0 || j == 7 ? createNewChessPiece(ChessPieceType.ROOK, ChessPieceColor.BLACK_PIECE) :
+              (j == 1 || j == 6 ? createNewChessPiece(ChessPieceType.KNIGHT, ChessPieceColor.BLACK_PIECE) :
+                (j == 2 || j == 5 ? createNewChessPiece(ChessPieceType.BISHOP, ChessPieceColor.BLACK_PIECE) :
+                  (j == 3 ? createNewChessPiece(ChessPieceType.QUEEN, ChessPieceColor.BLACK_PIECE) :
+                      createNewChessPiece(ChessPieceType.KING, ChessPieceColor.BLACK_PIECE)
                   )));
             cell.setPiece = blackPieceOfficials;
             this.boardSetup[i][j] = cell;
           }
           else if(i == 1){
-            const cp = ChessPieceBase.createNewPiece(ChessPieceType.PAWN, ChessPieceColor.BLACK_PIECE);
+            const cp = createNewChessPiece(ChessPieceType.PAWN, ChessPieceColor.BLACK_PIECE);
             if (isWhiteCell) {
               const cell = ChessCell.createWhiteCell(this.boardSetup.length - i, lettersMap[j]);
               cell.setPiece = cp
@@ -222,7 +222,7 @@ export class ChessBoardModel {
             }
           }
           else if(i == 6){
-            const cp = ChessPieceBase.createNewPiece();
+            const cp = createNewChessPiece();
             if (isWhiteCell) {
               const cell = ChessCell.createWhiteCell(this.boardSetup.length - i, lettersMap[j]);
               cell.setPiece = cp;
@@ -235,11 +235,11 @@ export class ChessBoardModel {
             }
           }
           else if (i == 7) {
-            const whitePieceOfficials = j == 0 || j == 7 ? ChessPieceBase.createNewPiece(ChessPieceType.ROOK) :
-              (j == 1 || j == 6 ? ChessPieceBase.createNewPiece(ChessPieceType.KNIGHT) :
-                (j == 2 || j == 5 ? ChessPieceBase.createNewPiece(ChessPieceType.BISHOP) :
-                  (j == 3 ? ChessPieceBase.createNewPiece(ChessPieceType.QUEEN) :
-                      ChessPieceBase.createNewPiece(ChessPieceType.KING)
+            const whitePieceOfficials = j == 0 || j == 7 ? createNewChessPiece(ChessPieceType.ROOK) :
+              (j == 1 || j == 6 ? createNewChessPiece(ChessPieceType.KNIGHT) :
+                (j == 2 || j == 5 ? createNewChessPiece(ChessPieceType.BISHOP) :
+                  (j == 3 ? createNewChessPiece(ChessPieceType.QUEEN) :
+                      createNewChessPiece(ChessPieceType.KING)
                   )));
 
             if (isWhiteCell) {

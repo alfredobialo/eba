@@ -1,10 +1,3 @@
-import { RookChessPiece } from "./RookChessPiece";
-import { KingChessPiece } from "./KingChessPiece";
-import { QueenChessPiece } from "./QueenChessPiece";
-import { BishopChessPiece } from "./BishopChessPiece";
-import { KnightChessPiece } from "./KnightChessPiece";
-import { PawnChessPiece } from "./PawnChessPiece";
-import { ChessPieceColor } from "../ChessPieceColor";
 import { ChessPieceType } from "../ChessPieceType";
 import { IChessPiece } from "../IChessPiece";
 
@@ -70,26 +63,6 @@ export abstract class ChessPieceBase implements IChessPiece {
       default:
         return "";
     }
-  }
-
-  public static createNewPiece(pieceType: ChessPieceType = ChessPieceType.PAWN, pieceColor: ChessPieceColor = ChessPieceColor.WHITE_PIECE): IChessPiece {
-
-    const isWhitePiece = pieceColor == ChessPieceColor.WHITE_PIECE;
-    switch (pieceType) {
-      case ChessPieceType.PAWN:
-        return new PawnChessPiece(isWhitePiece);
-      case ChessPieceType.KNIGHT:
-        return new KnightChessPiece(isWhitePiece);
-      case ChessPieceType.BISHOP:
-        return new BishopChessPiece(isWhitePiece);
-      case ChessPieceType.ROOK:
-        return new RookChessPiece(isWhitePiece);
-      case ChessPieceType.QUEEN:
-        return new QueenChessPiece(isWhitePiece);
-      case ChessPieceType.KING:
-        return new KingChessPiece(isWhitePiece);
-    }
-
   }
 
 
